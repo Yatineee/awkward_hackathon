@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mischief Site — Sign up</title>
   <link rel="stylesheet" href="../fronted/css/styles.css" />
+  <link rel="stylesheet" href="../fronted/css/signup.css" />
   <script defer src="../fronted/js/prank.js"></script>
 </head>
 <body class="shell">
@@ -41,4 +42,16 @@
     <a class="link" href="main.html">⟵ Back</a>
   </main>
 </body>
+<script>
+setInterval(() => {
+  const bar = document.createElement("div");
+  bar.className = "glitch-bar";
+  bar.style.top = Math.random() * window.innerHeight + "px";
+  document.body.appendChild(bar);
+  bar.style.opacity = 0.8;
+  setTimeout(() => { bar.style.opacity = 0; }, 100);
+  setTimeout(() => { bar.remove(); }, 300);
+}, 1500); // 每1.5秒随机闪一次
+</script>
+
 </html>
