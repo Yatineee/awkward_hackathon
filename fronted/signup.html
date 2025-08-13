@@ -22,22 +22,22 @@
       <label for="password" class="lbl">Password</label>
       <input id="password" name="password" type="password" placeholder="Make it strong 💪" required />
 
-      <button class="btn primary" type="submit">Sign up</button>
+      <button class="btn primary" type="submit" id="cometoaBtn" aria-label="cometoa">Sign up</button>
     </form>
 
-    <div class="sep"><span>or continue with</span></div>
+    <!-- <div class="sep"><span>or continue with</span></div> -->
 
-    <div class="grid">
+    <!-- <div class="grid">
       <button class="btn ghost">Continue with Google</button>
       <button class="btn ghost">Continue with GitHub</button>
       <button class="btn ghost">Continue with Email</button>
       <button class="btn ghost">Continue with Potato</button>
       <button class="btn ghost">Continue with Fax</button>
-      <!-- 彩蛋按钮：cometoa -->
-      <button class="btn ghost weird" id="cometoaBtn" aria-label="cometoa">Continue — cometoa</button>
-    </div>
+      彩蛋按钮：cometoad
+      <button class="btn ghost weird" id="cometoaBtn" aria-label="cometoa">Continue — cometoad</button>
+    </div> -->
 
-    <div id="confetti" class="confetti" hidden>🎉 Welcome to COMETOA 🎉</div>
+    <div id="confetti" class="confetti" hidden>🎉 Welcome to COMETOAD 🎉</div>
 
     <a class="link" href="main.html">⟵ Back</a>
   </main>
@@ -51,7 +51,7 @@ setInterval(() => {
   bar.style.opacity = 0.8;
   setTimeout(() => { bar.style.opacity = 0; }, 100);
   setTimeout(() => { bar.remove(); }, 300);
-}, 1500); // 每1.5秒随机闪一次
+}, 1000); // 每1.0秒随机闪一次
 </script>
 
 </html>
