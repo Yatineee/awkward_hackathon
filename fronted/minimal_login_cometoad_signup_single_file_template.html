@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ProTasker — Sign in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#b6a295;           /* warm beige background */
+      --card:#ffffff;         /* card surface */
+      --ink:#111827;          /* almost-black text */
+      --muted:#6b7280;        /* gray-500 */
+      --accent:#111827;       /* button color */
+      --accent-ink:#ffffff;   /* button text */
+      --ring: rgba(17,24,39,.12);
+      --shadow: 0 10px 30px rgba(17,24,39,.10);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink); background:var(--bg);
+      display:grid; place-items:center;
+    }
+    .shell{width:min(1100px,95vw); height:min(680px,92vh); background:linear-gradient(180deg, #c6b7ac 0%, #b6a295 100%); padding:18px; border-radius:28px; position:relative; overflow:hidden}
+    .frame{display:grid; grid-template-columns: 48% 52%; gap:0; width:100%; height:100%; background:transparent; border-radius:22px; overflow:hidden}
+
+    /* Left: image panel */
+    .media{position:relative; overflow:hidden}
+    .media::before{ /* diagonal lines like the reference */
+      content:""; position:absolute; inset:0; background-image: repeating-linear-gradient( 30deg, rgba(255,255,255,.12) 0 2px, transparent 2px 60px);
+      pointer-events:none; z-index:1
+    }
+    .media > img{width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.95) contrast(1.05)}
+
+    /* Right: auth card */
+    .panel{display:flex; align-items:center; justify-content:center; background:var(--card)}
+    .card{width:min(440px,88%); padding:42px 40px; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .brand{font-weight:700; letter-spacing:.2px; font-size:14px; color:var(--muted); margin-bottom:10px}
+    .title{font-size:28px; font-weight:700; margin:0 0 6px}
+    .subtitle{color:var(--muted); margin:0 0 26px; font-size:14px}
+
+    .field{margin:16px 0}
+    .label{display:block; font-size:13px; font-weight:600; margin:0 0 8px}
+    .input{width:100%; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px; font-size:15px; outline:none; transition:box-shadow .15s,border-color .15s}
+    .input:focus{border-color:#c4c7cf; box-shadow:0 0 0 6px var(--ring)}
+
+    .row{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:10px 0 18px}
+    .checkbox{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted)}
+    .checkbox input{width:16px; height:16px}
+    .link{color:#374151; text-decoration:none; font-weight:600}
+    .link:hover{text-decoration:underline}
+
+    .btn{width:100%; border:none; background:var(--accent); color:var(--accent-ink); font-weight:600; padding:14px 16px; border-radius:12px; cursor:pointer; font-size:15px; box-shadow:0 6px 18px rgba(17,24,39,.15); transition:transform .06s ease, box-shadow .2s ease, opacity .18s}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 10px 26px rgba(17,24,39,.20)}
+    .btn:active{transform:translateY(0)}
+
+    .muted{color:var(--muted); font-size:14px; text-align:center; margin-top:18px}
+
+    /* subtle toast for jokes */
+    .toast{position:absolute; left:50%; bottom:16px; transform:translateX(-50%); background:#111827; color:#fff; padding:10px 14px; font-size:13px; border-radius:999px; box-shadow:0 8px 24px rgba(0,0,0,.24); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s}
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-4px)}
+
+    /* hidden signup card uses same styles, shown via data-mode attribute */
+    [data-mode="signup"] .title::after{content:" – Create your account"; font-weight:600; color:#6b7280; font-size:14px; margin-left:6px}
+    [data-mode="signin"] .signup-only{display:none}
+    [data-mode="signup"] .signin-only{display:none}
+
+    /* micro awkward: move the primary button by 2px when hovering the card (tiny disruption) */
+    .card:hover .btn.primary{transform:translate(1px,-1px)}
+
+    /* tiny helper text under the button */
+    .helper{margin-top:10px; font-size:12px; color:#9ca3af}
+  </style>
+</head>
+<body>
+  <main class="shell" id="app">
+    <section class="frame">
+      <!-- Left media panel -->
+      <div class="media">
+        <img alt="Ceramic vases on shelves" src="https://www.laura-james.co.uk/cdn/shop/files/24.06.11_LJ_STUDIO3742.jpg?v=1747731458&width=1426"/>
+      </div>
+
+      <!-- Right auth panel -->
+      <div class="panel">
+        <div class="card" id="card" data-mode="signin">
+          <div class="brand">PROTASKER</div>
+          <h1 class="title">Welcome back</h1>
+          <p class="subtitle signin-only">Please enter your details</p>
+          <p class="subtitle signup-only">Let’s set you up in seconds</p>
+
+          <!-- Email -->
+          <div class="field">
+            <label class="label" for="email">Email</label>
+            <input id="email" class="input" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          
+          <!-- Password or Create password -->
+          <div class="field signin-only">
+            <label class="label" for="password">Password</label>
+            <input id="password" class="input" type="password" placeholder="••••••••" autocomplete="current-password" required>
+          </div>
+
+          <div class="field signup-only">
+            <label class="label" for="password2">Create a password</label>
+            <input id="password2" class="input" type="password" placeholder="At least 8 characters" autocomplete="new-password" required>
+          </div>
+
+          <div class="row signin-only">
+            <label class="checkbox"><input type="checkbox" id="remember"> Remember me</label>
+            <a class="link" href="#" id="forgot">Forgot password?</a>
+          </div>
+
+          <!-- Primary button -->
+          <button id="primary" class="btn primary signin-only">Sign in</button>
+          <button id="primarySignup" class="btn primary signup-only">Continue</button>
+          <div class="helper signup-only" id="helper">(Almost done…)</div>
+
+          <!-- Switcher -->
+          <p class="muted signin-only">Don’t have an account? <a class="link" href="#" id="toSignup">Sign up</a></p>
+          <p class="muted signup-only">Already have an account? <a class="link" href="#" id="toSignin">Go to sign in</a></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast">Did you mean <b>Continue</b>? Just kidding.</div>
+  </main>
+
+  <script>
+    const card = document.getElementById('card');
+    const toSignup = document.getElementById('toSignup');
+    const toSignin = document.getElementById('toSignin');
+    const primarySignup = document.getElementById('primarySignup');
+    const toast = document.getElementById('toast');
+    const helper = document.getElementById('helper');
+
+    // Mode switching
+    toSignup?.addEventListener('click', (e)=>{e.preventDefault(); card.setAttribute('data-mode','signup');
+      // small UX trap: keep email but clear password fields
+      document.getElementById('password2').value = '';
+      // After a short delay, quietly mutate the button label
+      setTimeout(()=>{
+        if(primarySignup.innerText.trim()==='Continue'){
+          primarySignup.innerText = 'Cometoad';
+          helper.textContent = 'Press Cometoad to proceed';
+        }
+      }, 900);
+    });
+
+    toSignin?.addEventListener('click', (e)=>{e.preventDefault(); card.setAttribute('data-mode','signin');});
+
+    // Easter egg: hovering the mutated button flashes a hint toast
+    primarySignup.addEventListener('mouseenter', ()=>{
+      if(primarySignup.innerText.toLowerCase().includes('cometoad')){
+        toast.classList.add('show');
+        setTimeout(()=>toast.classList.remove('show'), 1400);
+      }
+    });
+
+    // Mildly awkward: randomly nudge the primary button a few pixels on focus events
+    const nudge = () => {
+      const dx = (Math.random() * 6 - 3)|0; // -3..3
+      const dy = (Math.random() * 6 - 3)|0;
+      primarySignup.style.transform = `translate(${dx}px, ${dy}px)`;
+      setTimeout(()=> primarySignup.style.transform = '', 140);
+    }
+
+    ['focus','pointerdown'].forEach(evt=>{
+      primarySignup.addEventListener(evt, ()=>{
+        if(primarySignup.innerText.toLowerCase().includes('cometoad')) nudge();
+      })
+    });
+
+    // Fake submit handlers
+    document.getElementById('primary').addEventListener('click', ()=>{
+      // normal sign-in flow mock
+      alert('Error 422: Too many frogs. Please try again.');
+    });
+    primarySignup.addEventListener('click', ()=>{
+      // intentionally frustrating sign-up flow mock
+      if(primarySignup.innerText.toLowerCase().includes('cometoad')){
+        alert('Captcha failed: please identify all images containing a toad. (No images provided.)');
+      } else {
+        alert('Continuing\u2026');
+      }
+    });
+
+    // Optional: replace media image via URL param ?img=...
+    const params = new URLSearchParams(location.search);
+    const imgUrl = params.get('img');
+    if(imgUrl){
+      document.querySelector('.media > img').src = imgUrl;
+    }
+  </script>
+</body>
+</html>

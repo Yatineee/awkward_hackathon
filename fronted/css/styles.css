@@ -1,0 +1,172 @@
+:root{
+  --bg:#0b0b12; --card:#131322; --text:#e9e9f1; --muted:#9aa0a6;
+  --primary:#7c5cff; --primary-ink:#0c0820; --border:#24243a; --focus:#b39dff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body.shell{
+  margin:0; display:grid; place-items:center; background:radial-gradient(60% 60% at 50% 40%, #12122a, #090911);
+  color:var(--text); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+}
+.card{
+  width:min(560px, 92vw); background:color-mix(in lab, var(--card) 90%, black 10%);
+  border:1px solid var(--border); border-radius:20px; padding:28px; box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+h1{margin:0 0 10px; font-size:28px}
+.muted{color:var(--muted)}
+.tiny{font-size:12px}
+.row{display:flex; gap:12px; margin-top:18px}
+.btn{
+  appearance:none; border:1px solid var(--border); background:#18182c; color:var(--text);
+  padding:10px 14px; border-radius:12px; cursor:pointer; transition:.18s transform ease, .18s opacity ease, .18s background ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--primary); color:white; border-color:transparent}
+.btn.ghost{background:transparent}
+.link{display:inline-block; margin-top:16px; color:var(--text); text-decoration:none; border-bottom:1px dashed var(--border)}
+.link:hover{opacity:.9}
+.form{display:grid; gap:10px; margin-top:10px}
+.lbl{font-weight:600; font-size:13px}
+input{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border);
+  background:#0f0f1d; color:var(--text); outline:none;
+}
+input:focus{border-color:var(--focus); box-shadow:0 0 0 3px color-mix(in lab, var(--focus) 30%, transparent)}
+.sep{
+  display:flex; align-items:center; gap:10px; color:var(--muted); font-size:13px; margin:18px 0 10px;
+}
+.sep::before,.sep::after{content:""; height:1px; background:var(--border); flex:1}
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.weird{letter-spacing:.5px}
+.confetti{
+  margin-top:14px; padding:10px 12px; border-radius:10px; text-align:center;
+  background:#0e1f12; border:1px solid #1e3b22;
+  animation: pop .25s ease-out both;
+}
+@keyframes pop{from{transform:scale(.92); opacity:0} to{transform:scale(1); opacity:1}}
+/* 小恶搞：鼠标悬停在 cometoa 上偶尔“躲开” */
+.weird.dodge{position:relative}
+.weird.dodge:hover{transform:translateY(-1px)}
+.weird.dodge:active{transform:translateY(0)}
+
+
+/* === Auth split layout (append) === */
+.auth {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;   /* 左图略宽 */
+  background:
+    radial-gradient(60% 60% at 50% 40%, #12122a, #090911); /* 延续你的暗色背景 */
+  padding: 24px;
+}
+
+/* 整体带圆角并裁剪溢出，营造大容器感 */
+.auth-frame {
+  display: grid;
+  grid-template-columns: inherit;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+  background: #0b0b12;
+}
+
+/* 左侧大图 */
+.auth-hero {
+  position: relative;
+  background: #0e0e18;
+}
+.auth-hero > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 右侧表单区域 */
+.auth-form {
+  display: grid;
+  place-items: center;
+  background: #fff;                    /* 白底以贴近参考图 */
+  color: #111;                          /* 表单内用深色文字 */
+}
+
+/* 表单卡片尺寸与排版 */
+.auth-card {
+  width: min(420px, 90vw);
+  background: #fff;
+  color: #111;
+}
+
+.auth-title {
+  margin: 0 0 6px;
+  font-size: 28px;
+  line-height: 1.15;
+  color: #111;
+  font-weight: 700;
+}
+.auth-subtitle {
+  margin: 0 0 16px;
+  color: #555;
+}
+
+/* 复用你原有的 input / btn，但调成浅色主题 */
+.auth .lbl { color:#222; }
+.auth input{
+  background:#fff;
+  color:#111;
+  border:1px solid #cfcfd9;
+}
+.auth input:focus{
+  border-color:#9aa0a6;
+  box-shadow:0 0 0 3px rgba(124,92,255,.15);
+}
+
+/* 行内选项与按钮 */
+.auth-row{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  font-size:13px; color:#444; margin-top:4px;
+}
+.auth a.link-inline{ color:#6b6b76; text-decoration:none; border-bottom:1px dashed #d6d6de }
+.auth a.link-inline:hover{ opacity:.85 }
+
+.auth button.btn.primary{
+  width:100%; padding:12px 14px; margin-top:12px;
+  background:#a89f92;                 /* 贴近参考图按钮色 */
+  border-color:transparent;
+  color:#fff;
+  border-radius:12px;
+}
+
+/* 底部 “没有账号？” 行 */
+.auth .tiny.light {
+  color:#6a6a6a; text-align:center; margin-top:12px;
+}
+
+/* —— 移动端：图片在上，表单做成玻璃卡片 —— */
+@media (max-width: 900px){
+  .auth { padding: 12px; }
+  .auth-frame{
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+  }
+  .auth-hero{ height: 38vh; }
+  .auth-form{
+    background: transparent;
+    place-items: start;
+  }
+  .auth-card{
+    margin: -60px 16px 24px;           /* 覆盖在图片上形成卡片 */
+    padding: 16px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,.78);
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 14px;
+  }
+}
+
+/* 桌面端 auth-card 内边距 */
+@media (min-width: 901px){
+  .auth-card{ padding: 24px; border-radius: 0; }
+}
