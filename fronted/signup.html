@@ -1,57 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mischief Site — Sign up</title>
-  <link rel="stylesheet" href="../fronted/css/styles.css" />
-  <link rel="stylesheet" href="../fronted/css/signup.css" />
-  <script defer src="../fronted/js/prank.js"></script>
+  <title>Sign Up with Earth Orbit Age Selector</title>
+  <link rel="stylesheet" href="./css/signup.css" />
 </head>
-<body class="shell">
-  <main class="card">
-    <h1>Create account</h1>
+<body>
 
-    <form class="form" id="signupForm">
-      <label for="name" class="lbl">Name</label>
-      <input id="name" name="name" type="text" placeholder="Your glorious name" required />
+  <div id="mouse-popup">🐭 I'm afraid of mice!</div>
 
-      <label for="email" class="lbl">Email</label>
-      <input id="email" name="email" type="email" placeholder="you@example.com" required />
-
-      <label for="password" class="lbl">Password</label>
-      <input id="password" name="password" type="password" placeholder="Make it strong 💪" required />
-
-      <button class="btn primary" type="submit" id="cometoaBtn" aria-label="cometoa">Sign up</button>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    <form id="signup-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="hidden" name="birthYear" id="birthYear" />
+      <button id="submit-btn" type="submit">Create Account</button>
+      <button id="reload-btn" type="button">Reload Page</button>
     </form>
 
-    <!-- <div class="sep"><span>or continue with</span></div> -->
+    <div id="solar-system" title="Drag the Earth around the Sun to set your birth year">
+      <div id="sun" aria-label="Sun"></div>
+      <div id="orbit" aria-hidden="true"></div>
+      <div id="earth" aria-label="Earth" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="120" aria-valuenow="0"></div>
+    </div>
 
-    <!-- <div class="grid">
-      <button class="btn ghost">Continue with Google</button>
-      <button class="btn ghost">Continue with GitHub</button>
-      <button class="btn ghost">Continue with Email</button>
-      <button class="btn ghost">Continue with Potato</button>
-      <button class="btn ghost">Continue with Fax</button>
-      彩蛋按钮：cometoad
-      <button class="btn ghost weird" id="cometoaBtn" aria-label="cometoa">Continue — cometoad</button>
-    </div> -->
+    <div id="year-display">Years ago: 0</div>
+    <a class="back-link" href="index.html">← Back to Main Page</a>
+  </div>
 
-    <div id="confetti" class="confetti" hidden>🎉 Welcome to COMETOAD 🎉</div>
+  <div id="cursor-popup">
+    Change cursor to crosshair?
+    <button id="change-cursor-btn">Yes</button>
+  </div>
 
-    <a class="link" href="main.html">⟵ Back</a>
-  </main>
-</body>
-<script>
-setInterval(() => {
-  const bar = document.createElement("div");
-  bar.className = "glitch-bar";
-  bar.style.top = Math.random() * window.innerHeight + "px";
-  document.body.appendChild(bar);
-  bar.style.opacity = 0.8;
-  setTimeout(() => { bar.style.opacity = 0; }, 100);
-  setTimeout(() => { bar.remove(); }, 300);
-}, 1000); // 每1.0秒随机闪一次
+  <audio id="oof-sound" src="./soundfx/Roblox oof sound effect.mp3" preload="auto"></audio>
+
+  <script src="./js/signup.js"></script>
+  <script>
+    setInterval(() => {
+      const bar = document.createElement("div");
+      bar.className = "glitch-bar";
+      bar.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(bar);
+      bar.style.opacity = 0.8;
+      setTimeout(() => { bar.style.opacity = 0; }, 100);
+      setTimeout(() => { bar.remove(); }, 300);
+    }, 1000); // 每1.0秒随机闪一次
 </script>
-
+</body>
 </html>

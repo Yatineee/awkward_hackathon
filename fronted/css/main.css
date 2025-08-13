@@ -55,3 +55,57 @@ body::after{
 .home-btn.primary{background:var(--primary); border-color:transparent; color:#fff}
 .home-btn:hover{transform:translateY(-1px)}
 .home-tip{margin-top:12px; color:var(--muted); font-size:12px}
+
+/* ---------- Popup 强力隔离与还原 ---------- */
+.popup,
+.popup * {
+  box-sizing: border-box;
+}
+
+/* 关键：只控制层级与定位，不去限定尺寸，避免裁切按钮 */
+.popup{
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  /* 视觉外观（按需保留/调整）*/
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  /* 之前 overflow: hidden 可能裁掉按钮，先关掉 */
+  overflow: visible; 
+  /* 不用 flex，避免图片把按钮“挤掉” */
+  display: block;
+}
+
+/* 关键：彻底覆盖全局 img 正方形/拉伸规则 */
+.popup img{
+  display: block;
+  max-width: 100%;
+  height: auto !important;       /* 防止被全局 height:100% 影响 */
+  aspect-ratio: auto !important; /* 防止被全局 aspect-ratio:1/1 影响 */
+  object-fit: contain !important;/* 防止被全局 cover 裁切按钮区域 */
+  margin: 0;
+}
+
+/* 按钮确保能看到、可点击 */
+.popup button{
+  all: unset;               /* 清空外部按钮样式干扰 */
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px 12px;
+  font: 500 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  background: rgba(255,255,255,.1);
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+.popup button:hover{
+  background: rgba(255,255,255,.18);
+}
+
+/* 可选：给弹窗一个最小尺寸，避免图片太小把按钮挤没 */
+.popup{
+  min-width: 220px;
+  max-width: min(360px, 92vw);
+}

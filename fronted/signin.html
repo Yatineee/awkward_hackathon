@@ -44,13 +44,38 @@
   </div>
 
   <script>
-    // 可选的小交互：阻止提交 + 提示“对调”
-    document.getElementById('signinForm').addEventListener('submit', (e) => {
+    // 验证：如果“密码框”看起来像邮箱，而“邮箱框”不是邮箱 → 嘲讽并阻止提交
+    const form = document.getElementById('signinForm');
+    const emailInput = document.getElementById('field-email');     // 实际是邮箱，但标签写成 Password
+    const pwdInput   = document.getElementById('field-password');  // 实际是密码，但标签写成 Email
+
+    const looksLikeEmail = (s) => {
+      if (!s) return false;
+      s = s.trim();
+      // 常见域名或通用邮箱格式
+      const commonDomains = /@(gmail|qq|163|126|outlook|hotmail|yahoo|icloud|proton|live|msn)\./i;
+      const generalEmail  = /@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/i;
+      return (commonDomains.test(s) || generalEmail.test(s));
+    };
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = document.getElementById('field-email').value;
-      const pwd = document.getElementById('field-password').value;
-      alert(`(恶搞) 我们绝不会把它们对调：\nEmail: ${email}\nPassword: ${'*'.repeat(pwd.length)}`);
+      const email = emailInput.value.trim();
+      const pwd   = pwdInput.value.trim();
+
+      if (looksLikeEmail(pwd) && !looksLikeEmail(email)) {
+        alert(` You can see know!`);
+        // 想自动修正就取消下面两行的注释：
+        // emailInput.value = pwd;
+        // pwdInput.value = "";
+        // pwdInput.focus();
+        return; // 阻止提交
+      }
+
+      // 原来的恶搞提示（保留）
+      alert(`😏Don't you have eyes?：\nEmail: ${email}\nPassword: ${'*'.repeat(pwd.length)}`);
     });
+
 
     // 可选：故障彩条（想要就保留）
     setInterval(() => {
