@@ -15,7 +15,8 @@
     <form id="signup-form">
       <input type="text" name="name" placeholder="Your Name" required />
       <input type="email" name="email" placeholder="Email Address" required />
-      <input type="password" name="password" placeholder="Password" required />
+      <input type="password" id="password" name="password" required>
+      <ul id="password-feedback" style="display: none; color: #cc0000; padding-left: 20px; font-size: 13px;"></ul>
       <input type="hidden" name="birthYear" id="birthYear" />
       <button id="submit-btn" type="submit">Create Account</button>
       <button id="reload-btn" type="button">Reload Page</button>
@@ -37,18 +38,29 @@
   </div>
 
   <audio id="oof-sound" src="./soundfx/Roblox oof sound effect.mp3" preload="auto"></audio>
+  <audio id="popupSound" src="./soundfx/augh.mp3" preload="auto"></audio>
 
+  <script src="./js/LiveValidation.js"></script>
   <script src="./js/signup.js"></script>
-  <script>
-    setInterval(() => {
-      const bar = document.createElement("div");
-      bar.className = "glitch-bar";
-      bar.style.top = Math.random() * window.innerHeight + "px";
-      document.body.appendChild(bar);
-      bar.style.opacity = 0.8;
-      setTimeout(() => { bar.style.opacity = 0; }, 100);
-      setTimeout(() => { bar.remove(); }, 300);
-    }, 1000); // 每1.0秒随机闪一次
-</script>
+  <script src="./js/random sfx.js"></script>
+  <script src="./js/agree.js"></script>
+
+  <div id="tos-modal" class="tos-modal">
+  <div class="tos-content">
+    <span class="tos-close" id="tos-close">&times;</span>
+    <h2>Terms of Service</h2>
+    <div class="tos-scroll">
+      <p>By using this site, you agree to the following terms and conditions:</p>
+      <ul>
+        <li>No misuse of the service.</li>
+        <li>You must provide accurate info.</li>
+        <li>Data may be stored or logged.</li>
+        <li>All rights reserved by the creator.</li>
+      </ul>
+    </div>
+    <button id="accept-tos">I Agree</button>
+  </div>
+</div>
+
 </body>
 </html>

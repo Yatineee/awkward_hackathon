@@ -1,3 +1,4 @@
+// signup-page.js 或 main.js（按你的文件名替换）
 document.addEventListener('DOMContentLoaded', () => {
   const earth = document.getElementById('earth');
   const yearDisplay = document.getElementById('year-display');
@@ -130,6 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', e => {
     e.preventDefault();
+
+    // —— 关键：不通过就不让提交 —— //
+    if (!form.checkValidity()) {
+      form.reportValidity(); // 弹出原生提示（含我们在 LiveValidation.js 设置的错误）
+      return;
+    }
+
     const yearsAgo = Math.floor(totalRotations);
     const birthYear = currentYear - yearsAgo;
     birthYearInput.value = birthYear;

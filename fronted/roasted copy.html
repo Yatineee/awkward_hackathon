@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>You Fell For It 😏</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #0b0b12;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      max-width: 500px;
+      line-height: 1.4;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+    .timer {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <h1>😂 Gotcha_00!</h1>
+  <p>That big “Close” button? Totally fake.  
+     The picture? Also fake.  
+     You’ve been <strong>beautifully</strong> pranked.</p>
+  <div class="timer" id="timer">Returning to login in 5 seconds…</div>
+
+  <script>
+    let countdown = 5;
+    const timerEl = document.getElementById('timer');
+    const target = 'index.html'; // 这里改成你要返回的页面
+
+    const tick = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        clearInterval(tick);
+        window.location.href = target;
+      } else {
+        timerEl.textContent = `Returning to login in ${countdown} seconds…`;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

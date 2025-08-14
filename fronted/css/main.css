@@ -109,3 +109,41 @@ body::after{
   min-width: 220px;
   max-width: min(360px, 92vw);
 }
+
+/* 布局微调 */
+.popup .popup-body{ padding:14px; }
+
+.popup .btn-close-fake{
+  margin-top:10px;
+  border-radius: 0 0 12px 12px;
+  letter-spacing:.3px;
+}
+
+/* 真的小 ×：右上角、半透明、很难点到 */
+.popup .x-real{
+  position:absolute;
+  top:6px; right:8px;
+  width:18px; height:18px;
+  line-height:18px;
+  font: 700 14px/18px ui-sans-serif, system-ui;
+  color:#fff;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  opacity:.22;
+  cursor:pointer;
+  padding:0;
+  text-align:center;
+  z-index:2;
+  backdrop-filter: blur(2px);
+  transition: opacity .2s, transform .12s;
+}
+.popup .x-real:hover{ opacity:.55; transform: scale(1.05); }
+.popup .x-real:active{ transform: scale(.95); }
+
+/* 让假“Close”更像真的 */
+.popup .btn-close-fake::after{
+  content:"  (Recommended)";
+  opacity:.6;
+  font-weight:400;
+}
