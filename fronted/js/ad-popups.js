@@ -7,7 +7,7 @@ const adImages = [
 // 你的“嘲笑页”
 // const ROAST_URL = './roasted.html';
 const IMG_ROAST_URL = window.ROAST_IMG_URL || 'roasted.html'; // 点图片去这里
-const BTN_ROAST_URL = window.ROAST_BTN_URL || 'roasted copy.html'; // 点假Close去这里
+const BTN_ROAST_URL = window.ROAST_BTN_URL || 'https://puginarug.com/'; // 点假Close去这里
 const BG_ROAST_URL  = window.ROAST_BG_URL  || 'roasted.html';     // 点弹窗其它区域
 
 function getRandomAdImage() {
